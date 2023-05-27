@@ -1,4 +1,4 @@
-import { useRoutes, BrowserRouter } from "react-router-dom";
+import {BrowserRouter, useRoutes} from "react-router-dom";
 
 import Home from "./pages/Home";
 import MyAccount from "./pages/MyAccount";
@@ -8,28 +8,29 @@ import NotFound from "./pages/NotFound";
 import SignIn from "./pages/SignIn";
 import Layout from "./components/Layout";
 
-const AppRoutes = () => {
-  const routes = useRoutes([
-    { path: "/",element: <Home /> },
-    { path: "/my-orders",element: <MyOrders /> },
-    { path: "/my-order",element: <MyOrder /> },
-    { path: "/my-account",element: <MyAccount /> },
-    { path: "/sign-in",element: <SignIn /> },
-    { path: "/*",element: <NotFound /> },
-  ]);
+import { ShoppingCartProvider } from "./context/index.jsx";
 
-  return routes;
+const AppRoutes = () => {
+  return useRoutes([
+    {path: "/", element: <Home/>},
+    {path: "/my-orders", element: <MyOrders/>},
+    {path: "/my-order", element: <MyOrder/>},
+    {path: "/my-account", element: <MyAccount/>},
+    {path: "/sign-in", element: <SignIn/>},
+    {path: "/*", element: <NotFound/>},
+  ]);
 };
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <Layout>
-        <AppRoutes />
-      </Layout>
-    </BrowserRouter>
+    <ShoppingCartProvider>
+      <BrowserRouter>
+        <Layout>
+          <AppRoutes />
+        </Layout>
+      </BrowserRouter>
+    </ShoppingCartProvider>
   );
 };
-
 
 export default App;

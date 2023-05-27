@@ -1,6 +1,20 @@
+import { useContext } from "react";
+import { PlusIcon } from "@heroicons/react/24/outline";
+
+import { ShoppingCartContext } from "../context/index.jsx";
+
 const Card = ({ images, title, category, price }) => {
+  const { count, setCount, openProductDetail } =  useContext(ShoppingCartContext);
+
+  const handleAddProduct = () => setCount(count + 1);
+
+  const handleProductDetail = () => openProductDetail();
+
   return (
-    <div className="w-56 h-60 rounded-lg bg-white">
+    <div
+      className="w-56 h-60 rounded-lg bg-white"
+      onClick={handleProductDetail}
+    >
         <figure className="w-100 h-4/5 relative mb-2">
             <img 
               className="
@@ -36,11 +50,13 @@ const Card = ({ images, title, category, price }) => {
                 flex justify-center
                 absolute top-0 right-0
                 m-2
+                p-1
                 rounded-full
                 bg-white
               "
+              onClick={handleAddProduct}
             >
-                +
+                <PlusIcon />
             </button>
         </figure>
 
