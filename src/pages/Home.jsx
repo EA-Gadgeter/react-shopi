@@ -24,10 +24,7 @@ const Home = () => {
           items.map((item) => (
             <Card
               key={`card-${item.id}`}
-              title={item.title}
-              price={item.price}
-              category={item.category}
-              images={item.images}
+              productoInfo={item}
             />
           ))
         }

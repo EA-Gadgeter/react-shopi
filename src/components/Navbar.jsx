@@ -19,6 +19,8 @@ const Navbar = () => {
         z-10 
         py-5 px-8 text-sm 
         font-light
+        border-b
+        border-black
         bg-white
       "
     >

@@ -3,12 +3,20 @@ import { PlusIcon } from "@heroicons/react/24/outline";
 
 import { ShoppingCartContext } from "../context/index.jsx";
 
-const Card = ({ images, title, category, price }) => {
-  const { count, setCount, openProductDetail } =  useContext(ShoppingCartContext);
+const Card = ({ productInfo }) => {
+  const { count, setCount, openProductDetail, setProductToShow } =  useContext(ShoppingCartContext);
 
-  const handleAddProduct = () => setCount(count + 1);
+  const {images, title, category, price} = productInfo;
 
-  const handleProductDetail = () => openProductDetail();
+  const handleAddProduct = (event) => {
+    event.stopPropagation();
+    setCount(count + 1);
+  };
+
+  const handleProductDetail = () => {
+    setProductToShow(productInfo);
+    openProductDetail();
+  };
 
   return (
     <div
@@ -24,7 +32,7 @@ const Card = ({ images, title, category, price }) => {
                 cursor-pointer
                 object-cover
               "
-              src={images[0]} 
+              src={images[0]}
               alt={title}
             />
 
