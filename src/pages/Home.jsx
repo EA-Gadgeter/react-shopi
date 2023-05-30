@@ -3,11 +3,12 @@ import { ShoppingCartContext } from "../context/index.jsx";
 
 import Card from "../components/Card";
 import ProductDetail from "../components/ProductDetail.jsx";
+import CheckoutSideMenu from "../components/CheckoutSideMenu.jsx";
 
 const API_BASE_URL =  "https://api.escuelajs.co/api/v1";
 
 const Home = () => {
-  const { productDetailOpen } = useContext(ShoppingCartContext);
+  const { productDetailOpen, checkoutMenuOpen } = useContext(ShoppingCartContext);
 
   const [items, setItems] = useState([]);
 
@@ -24,12 +25,13 @@ const Home = () => {
           items.map((item) => (
             <Card
               key={`card-${item.id}`}
-              productoInfo={item}
+              productInfo={item}
             />
           ))
         }
       </div>
       {productDetailOpen && <ProductDetail />}
+      {checkoutMenuOpen && <CheckoutSideMenu />}
     </>
   );
 };

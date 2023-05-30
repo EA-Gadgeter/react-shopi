@@ -1,27 +1,44 @@
-import { useContext } from "react";
-import { PlusIcon } from "@heroicons/react/24/outline";
+import { useContext, useState, useEffect } from "react";
+import { PlusIcon, CheckIcon } from "@heroicons/react/24/outline";
 
 import { ShoppingCartContext } from "../context/index.jsx";
 
 const Card = ({ productInfo }) => {
-  const { count, setCount, openProductDetail, setProductToShow } =  useContext(ShoppingCartContext);
+  const [addedToCart, setAddedToCart] = useState(false);
+
+  const {
+    count,
+    setCount,
+    openProductDetail,
+    setProductToShow,
+    setCartProducts,
+    cartProducts,
+    closeCheckoutMenu,
+  } = useContext(ShoppingCartContext);
 
   const {images, title, category, price} = productInfo;
 
   const handleAddProduct = (event) => {
     event.stopPropagation();
-    setCount(count + 1);
+
+    const isInCart = cartProducts.filter(product =>  product.id === productInfo.id);
+
+    if (!isInCart.length) {
+      setCartProducts([...cartProducts, productInfo]);
+      setCount(count + 1);
+      setAddedToCart(true);
+    }
   };
 
   const handleProductDetail = () => {
     setProductToShow(productInfo);
+    closeCheckoutMenu();
     openProductDetail();
   };
 
   return (
     <div
       className="w-56 h-60 rounded-lg bg-white"
-      onClick={handleProductDetail}
     >
         <figure className="w-100 h-4/5 relative mb-2">
             <img 
@@ -34,6 +51,7 @@ const Card = ({ productInfo }) => {
               "
               src={images[0]}
               alt={title}
+              onClick={handleProductDetail}
             />
 
             <span 
@@ -52,7 +70,7 @@ const Card = ({ productInfo }) => {
             </span>
 
             <button
-              className="
+              className={`
                 w-7
                 h-7
                 flex justify-center
@@ -60,11 +78,12 @@ const Card = ({ productInfo }) => {
                 m-2
                 p-1
                 rounded-full
-                bg-white
-              "
+                ${!addedToCart ? "text-black" : "text-white"}
+                ${!addedToCart ? "bg-white" : "bg-black"}
+              `}
               onClick={handleAddProduct}
             >
-                <PlusIcon />
+              {!addedToCart ? <PlusIcon/> : <CheckIcon />}
             </button>
         </figure>
 
