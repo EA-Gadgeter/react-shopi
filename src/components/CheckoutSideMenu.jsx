@@ -5,10 +5,35 @@ import { ShoppingCartContext } from "../context/index.jsx";
 
 import OrderCard from "./OrderCard.jsx";
 
+import { totalPrice } from "../utils/index.js";
+
 const CheckoutSideMenu = () => {
-  const { closeCheckoutMenu, cartProducts } = useContext(ShoppingCartContext);
+  const { 
+    closeCheckoutMenu,
+    cartProducts,
+    setCartProducts,
+    order,
+    setOrder
+  } = useContext(ShoppingCartContext);
 
   const handleClose = () => closeCheckoutMenu();
+
+  const handleDelete = (id) => {
+    const filteredProducts = cartProducts.filter(product => product.id != id);
+    setCartProducts(filteredProducts);
+  };
+
+  const handleCheckout = () => {
+    const orderToAdd = {
+      date: new Date(),
+      products: cartProducts,
+      totalProducts: cartProducts.length,
+      totalPrice: totalPrice(cartProducts)
+    };
+
+    setOrder([...order, orderToAdd]);
+    setCartProducts([]);
+  };
 
   return (
     <aside
@@ -32,16 +57,31 @@ const CheckoutSideMenu = () => {
         </button>
       </div>
 
-      <div className="flex flex-col gap-3.5 overflow-y-auto scrollbar-hide">
+      <div className="flex flex-1 flex-col gap-3.5 overflow-y-auto scrollbar-hide">
         {
           cartProducts.map(product => {
             return <OrderCard
               key={`order-card-${product.id}`}
               productInfo={product}
+              handleDelete={handleDelete}
             />;
           })
         }
       </div>
+
+        <div>
+          <p className="flex justify-between items-center">
+            <span className="font-light">Total:</span>
+            <span className="font-medium text-2xl">${totalPrice(cartProducts)}</span>
+          </p>
+
+          <button
+            className="w-full py-3 rounded-lg text-white bg-black" 
+            onClick={handleCheckout}
+          >
+            Checkout
+          </button>
+        </div>
     </aside>
   );
 };

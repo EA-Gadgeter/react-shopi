@@ -1,14 +1,12 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { PlusIcon, CheckIcon } from "@heroicons/react/24/outline";
 
 import { ShoppingCartContext } from "../context/index.jsx";
 
 const Card = ({ productInfo }) => {
   const [addedToCart, setAddedToCart] = useState(false);
-
+  
   const {
-    count,
-    setCount,
     openProductDetail,
     setProductToShow,
     setCartProducts,
@@ -18,14 +16,21 @@ const Card = ({ productInfo }) => {
 
   const {images, title, category, price} = productInfo;
 
+  useEffect(() => {
+    const isInCart = cartProducts.filter(product =>  product.id === productInfo.id).length > 0;
+
+    if (isInCart)
+      setAddedToCart(true);
+    else
+      setAddedToCart(false);  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cartProducts]);
+
   const handleAddProduct = (event) => {
     event.stopPropagation();
 
-    const isInCart = cartProducts.filter(product =>  product.id === productInfo.id);
-
-    if (!isInCart.length) {
+    if (!addedToCart) {
       setCartProducts([...cartProducts, productInfo]);
-      setCount(count + 1);
       setAddedToCart(true);
     }
   };
