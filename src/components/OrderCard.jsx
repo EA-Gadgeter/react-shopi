@@ -38,4 +38,4 @@ const OrderCard = ({ productInfo, handleDelete }) => {
   );
 };
 
-export default  OrderCard;
+export default OrderCard;
