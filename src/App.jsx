@@ -13,6 +13,7 @@ import { ShoppingCartProvider } from "./context/index.jsx";
 const AppRoutes = () => {
   return useRoutes([
     {path: "/", element: <Home/>},
+    {path: "/:category", element: <Home/>},
     {path: "/my-orders", element: <MyOrders/>},
     {path: "/my-orders/last", element: <MyOrder/>},
     {path: "/my-orders/:id", element: <MyOrder/>},

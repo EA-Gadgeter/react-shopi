@@ -1,5 +1,6 @@
-import {createContext, useState} from "react";
+import {createContext, useEffect, useState} from "react";
 
+const API_BASE_URL =  "https://api.escuelajs.co/api/v1";
 export const ShoppingCartContext = createContext();
 
 export const ShoppingCartProvider = ({ children }) => {
@@ -14,6 +15,8 @@ export const ShoppingCartProvider = ({ children }) => {
   // Shopping Cart - Order
   const [order, setOrder] = useState([]);
 
+  const [searchByTitle, setSearchByTitle] =  useState("");
+
   // Toggle Product Detail
   const openProductDetail = () => setProductDetailOpen(true);
   const closeProductDetail = () => setProductDetailOpen(false);
@@ -21,6 +24,15 @@ export const ShoppingCartProvider = ({ children }) => {
   // Toggle Checkout Menu
   const openCheckoutMenu = () => setCheckoutMenuOpen(true);
   const closeCheckoutMenu = () => setCheckoutMenuOpen(false);
+
+  // Get Products
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    fetch(`${API_BASE_URL}/products`)
+      .then(res => res.json())
+      .then(data => setItems(data));
+  }, []);
 
   return (
     <ShoppingCartContext.Provider
@@ -36,7 +48,10 @@ export const ShoppingCartProvider = ({ children }) => {
         openCheckoutMenu,
         closeCheckoutMenu,
         order,
-        setOrder
+        setOrder,
+        items,
+        searchByTitle,
+        setSearchByTitle
       }}
     >
       {children}

@@ -1,4 +1,4 @@
-import {useContext} from "react";
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 
@@ -67,19 +67,28 @@ const Navbar = () => {
 
         <li>
           <NavLink
-            to="/furnitures"
+            to="/furniture"
             className={({ isActive }) => isActive ? activeStyle : undefined}
           >
-            Furnitures
+            Furniture
           </NavLink>
         </li>
 
         <li>
           <NavLink
-            to="/toys"
+            to="/shoes"
             className={({ isActive }) => isActive ? activeStyle : undefined}
           >
-            Toys
+            Shoes
+          </NavLink>
+        </li>
+
+        <li>
+          <NavLink
+            to="/others"
+            className={({ isActive }) => isActive ? activeStyle : undefined}
+          >
+            Others
           </NavLink>
         </li>
       </ul>

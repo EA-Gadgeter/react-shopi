@@ -1,35 +1,80 @@
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
+import { useParams } from "react-router-dom";
 import { ShoppingCartContext } from "../context/index.jsx";
 
 import Card from "../components/Card";
 import ProductDetail from "../components/ProductDetail.jsx";
 import CheckoutSideMenu from "../components/CheckoutSideMenu.jsx";
 
-const API_BASE_URL =  "https://api.escuelajs.co/api/v1";
-
 const Home = () => {
-  const { productDetailOpen, checkoutMenuOpen } = useContext(ShoppingCartContext);
+  const { productDetailOpen,
+    checkoutMenuOpen,
+    items, searchByTitle,
+    setSearchByTitle
+  } = useContext(ShoppingCartContext);
 
-  const [items, setItems] = useState([]);
+  const { category} =  useParams();
 
-  useEffect(() => {
-    fetch(`${API_BASE_URL}/products`)
-      .then(res => res.json())
-      .then(data => setItems(data));
-  }, []);
+  const handleInput = (event) => {
+    setSearchByTitle(event.target.value);
+  };
+
+  let filteredItems = [];
+
+  if (!searchByTitle) {
+    filteredItems = items;
+  }
+
+  if (searchByTitle) {
+    filteredItems = items.filter(item => {
+      const itemTitle = item.title.toLowerCase();
+      const searchTitle = searchByTitle.toLowerCase();
+
+      return  itemTitle.includes(searchTitle);
+    });
+  }
+
+  if (category) {
+    filteredItems = filteredItems.filter(item => {
+      const itemCategory = item.category.name.toLowerCase();
+
+      return  itemCategory.includes(category.toLowerCase());
+    });
+  }
 
   return (
     <>
+      <h1 className="mb-6 font-medium text-xl">Exclusive Products</h1>
+
+      <input type="text" placeholder="Search a product..."
+       className="
+         w-80
+         p-4
+         mb-6
+         rounded-lg
+         border
+         border-black
+         focus:outline-none
+       "
+       value={searchByTitle}
+       onChange={handleInput}
+      />
+
       <div className="w-full max-w-screen-lg grid grid-cols-4 gap-4">
-        {
-          items.map((item) => (
-            <Card
-              key={`card-${item.id}`}
-              productInfo={item}
-            />
-          ))
+        {filteredItems.length ?
+          (
+            filteredItems.map((item) => (
+              <Card
+                key={`card-${item.id}`}
+                productInfo={item}
+              />
+            ))
+          )
+          // eslint-disable-next-line react/no-unescaped-entities
+          : <h1>We don't have any products</h1>
         }
       </div>
+
       {productDetailOpen && <ProductDetail />}
       {checkoutMenuOpen && <CheckoutSideMenu />}
     </>

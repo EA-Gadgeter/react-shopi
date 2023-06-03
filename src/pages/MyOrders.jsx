@@ -10,7 +10,7 @@ const MyOrders = () => {
 
   return (
     <>
-      <h1 className="mb-6">My Orders</h1>
+      <h1 className="mb-6 font-medium text-xl">My Orders</h1>
       <div className="flex flex-col gap-3.5 overflow-y-auto scrollbar-hide">
         {
           order.map((order, index) => {
