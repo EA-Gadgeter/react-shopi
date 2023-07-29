@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { ShoppingCartContext } from "../context/shoppingCart.jsx";
 
+import ProtectedRoute from "../components/ProtectedRoute.jsx";
 import Card from "../components/Card";
 import ProductDetail from "../components/ProductDetail.jsx";
 import CheckoutSideMenu from "../components/CheckoutSideMenu.jsx";
@@ -43,7 +44,7 @@ const Home = () => {
   }
 
   return (
-    <>
+    <ProtectedRoute>
       <h1 className="mb-6 font-medium text-xl">Exclusive Products</h1>
 
       <input type="text" placeholder="Search a product..."
@@ -77,7 +78,7 @@ const Home = () => {
 
       {productDetailOpen && <ProductDetail />}
       {checkoutMenuOpen && <CheckoutSideMenu />}
-    </>
+    </ProtectedRoute>
   );
 };
 
