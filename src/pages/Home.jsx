@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
-import { ShoppingCartContext } from "../context/index.jsx";
+import { ShoppingCartContext } from "../context/shoppingCart.jsx";
 
 import Card from "../components/Card";
 import ProductDetail from "../components/ProductDetail.jsx";

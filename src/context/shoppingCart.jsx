@@ -51,7 +51,7 @@ export const ShoppingCartProvider = ({ children }) => {
         setOrder,
         items,
         searchByTitle,
-        setSearchByTitle
+        setSearchByTitle,
       }}
     >
       {children}

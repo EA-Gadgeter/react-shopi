@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 
-import { ShoppingCartContext } from "../context";
+import { ShoppingCartContext } from "../context/shoppingCart.jsx";
 
 import OrderCard from "../components/OrderCard";
 

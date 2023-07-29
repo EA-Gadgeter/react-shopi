@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { PlusIcon, CheckIcon } from "@heroicons/react/24/outline";
 
-import { ShoppingCartContext } from "../context/index.jsx";
+import { ShoppingCartContext } from "../context/shoppingCart.jsx";
 
 const Card = ({ productInfo }) => {
   const [addedToCart, setAddedToCart] = useState(false);

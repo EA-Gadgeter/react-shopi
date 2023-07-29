@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 
-import { ShoppingCartContext } from "../context";
+import { ShoppingCartContext } from "../context/shoppingCart.jsx";
 
 import OrdersCard from "../components/OrdersCard";
 

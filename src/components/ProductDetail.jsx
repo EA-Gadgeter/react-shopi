@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { XCircleIcon } from "@heroicons/react/24/outline";
-import { ShoppingCartContext } from "../context/index.jsx";
+import { ShoppingCartContext } from "../context/shoppingCart.jsx";
 
 const ProductDetail = () => {
   const {

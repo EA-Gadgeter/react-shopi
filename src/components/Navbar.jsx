@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 
 
-import { ShoppingCartContext } from "../context/index.jsx";
+import { ShoppingCartContext } from "../context/shoppingCart.jsx";
 
 const Navbar = () => {
   const { openCheckoutMenu, closeProductDetail, cartProducts } =  useContext(ShoppingCartContext);
@@ -101,6 +101,7 @@ const Navbar = () => {
         <li>
           <NavLink
             to="/my-orders"
+            className={({ isActive }) => isActive ? activeStyle : undefined}
           >
             My Orders
           </NavLink>
@@ -109,6 +110,7 @@ const Navbar = () => {
         <li>
           <NavLink
             to="/my-account"
+            className={({ isActive }) => isActive ? activeStyle : undefined}
           >
             My Account
           </NavLink>
@@ -117,6 +119,7 @@ const Navbar = () => {
         <li>
           <NavLink
             to="/sign-in"
+            className={({ isActive }) => isActive ? activeStyle : undefined}
           >
             Sign In
           </NavLink>

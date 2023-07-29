@@ -8,7 +8,8 @@ import NotFound from "./pages/NotFound";
 import SignIn from "./pages/SignIn";
 import Layout from "./components/Layout";
 
-import { ShoppingCartProvider } from "./context/index.jsx";
+import { ShoppingCartProvider } from "./context/shoppingCart.jsx";
+import { AuthProvider } from "./context/auth.jsx";
 
 const AppRoutes = () => {
   return useRoutes([
@@ -25,13 +26,15 @@ const AppRoutes = () => {
 
 const App = () => {
   return (
-    <ShoppingCartProvider>
-      <BrowserRouter>
-        <Layout>
-          <AppRoutes />
-        </Layout>
-      </BrowserRouter>
-    </ShoppingCartProvider>
+    <AuthProvider>
+      <ShoppingCartProvider>
+        <BrowserRouter>
+          <Layout>
+            <AppRoutes />
+          </Layout>
+        </BrowserRouter>
+      </ShoppingCartProvider>
+    </AuthProvider>
   );
 };
 
