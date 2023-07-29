@@ -1,5 +1,3 @@
-
-
 const MyAccount = () => {
   return (
     <>
@@ -11,7 +9,7 @@ const MyAccount = () => {
         <button
           className="w-full py-3 rounded-lg text-center border border-black"
         >
-          Edit
+          Log Out
         </button>
       </div>
     </>

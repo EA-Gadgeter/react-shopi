@@ -4,6 +4,7 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [authInfo, setAuthInfo] = useState({
+    user: "",
     email: "",
     password: "",
   });
@@ -22,6 +23,7 @@ export const AuthProvider = ({ children }) => {
         ...authStorageParsed,
       };
     });
+    setIsAuth(true);
   }, []);
 
   return (
