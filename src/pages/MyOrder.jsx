@@ -4,6 +4,7 @@ import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 
 import { ShoppingCartContext } from "../context/shoppingCart.jsx";
 
+import ProtectedRoute from "../components/ProtectedRoute.jsx";
 import OrderCard from "../components/OrderCard";
 
 const MyOrder = () => {
@@ -13,7 +14,7 @@ const MyOrder = () => {
   if (!orderId) orderId = -1;
 
   return (
-    <>
+    <ProtectedRoute>
       <div className="w-80 flex justify-center items-center relative mb-6">
         <Link to="/my-orders" className="absolute left-0">
           <ChevronLeftIcon 
@@ -40,7 +41,7 @@ const MyOrder = () => {
           })
         }
       </div>
-    </>
+    </ProtectedRoute>
   );
 };
 

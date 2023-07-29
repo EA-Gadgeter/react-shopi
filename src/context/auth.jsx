@@ -23,7 +23,6 @@ export const AuthProvider = ({ children }) => {
         ...authStorageParsed,
       };
     });
-    setIsAuth(true);
   }, []);
 
   return (

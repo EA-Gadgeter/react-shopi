@@ -1,15 +1,25 @@
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../context/auth.jsx";
 
 import SignUp from "./SignUp.jsx";
 
 const SignIn = () => {
-  const { authInfo, isAuth } = useContext(AuthContext);
+  const { authInfo, isAuth, setIsAuth } = useContext(AuthContext);
   const [showSignUp, setShowSignUp] = useState(false);
 
+  const navigate = useNavigate();
+
   const loginButtonStyles = "w-full py-3 rounded-lg text-center text-white bg-black";
+  const signUpButtonStyles = "w-full max-w-md py-3 rounded-lg text-center border border-black";
+
   const dissableLoginButton = Object.values(authInfo).includes("");
+
+  const handleLogin = () => {
+    setIsAuth(true);
+    navigate("/");
+  };
 
   return (
     <>
@@ -24,8 +34,9 @@ const SignIn = () => {
               <p>Password: <span className="font-bold">{authInfo.password}</span></p>
 
               <button
-                className={isAuth ? loginButtonStyles : `${loginButtonStyles} bg-opacity-50`}
+                className={!dissableLoginButton ? loginButtonStyles : `${loginButtonStyles} opacity-50`}
                 disabled={dissableLoginButton}
+                onClick={handleLogin}
               >
                 Log In
               </button>
@@ -33,8 +44,8 @@ const SignIn = () => {
             <a href="#" className="mb-6 border-b border-black">Forgot my password</a>
 
             <button
-              className="w-full max-w-md py-3 rounded-lg text-center border border-black"
-              disabled={!dissableLoginButton}
+              className={dissableLoginButton ? signUpButtonStyles : `${signUpButtonStyles} opacity-75`}
+              disabled={!dissableLoginButton || !isAuth}
               onClick={() => setShowSignUp(true)}
             >
               Sign up

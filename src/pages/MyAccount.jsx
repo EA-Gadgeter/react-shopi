@@ -1,6 +1,8 @@
+import ProtectedRoute from "../components/ProtectedRoute";
+
 const MyAccount = () => {
   return (
-    <>
+    <ProtectedRoute>
       <h1 className="mb-8 font-medium text-xl">My Account</h1>
       <div className="w-full flex max-w-md flex-col gap-3.5">
         <p>Email: <span className="font-bold">example@gmail.com</span></p>
@@ -12,7 +14,7 @@ const MyAccount = () => {
           Log Out
         </button>
       </div>
-    </>
+    </ProtectedRoute>
   );
 };
 
