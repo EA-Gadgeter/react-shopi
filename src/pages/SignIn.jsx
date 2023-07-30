@@ -45,7 +45,7 @@ const SignIn = () => {
 
             <button
               className={dissableLoginButton ? signUpButtonStyles : `${signUpButtonStyles} opacity-75`}
-              disabled={!dissableLoginButton || !isAuth}
+              disabled={!dissableLoginButton || isAuth}
               onClick={() => setShowSignUp(true)}
             >
               Sign up
